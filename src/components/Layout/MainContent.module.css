@@ -1,0 +1,10 @@
+.main {
+    flex: 1;
+    background-color: hsl(var(--muted));
+    /* Slightly different bg for contrast */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    position: relative;
+    overflow: hidden;
+}

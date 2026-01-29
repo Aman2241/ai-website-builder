@@ -1,0 +1,51 @@
+.header {
+    height: 60px;
+    border-bottom: 1px solid hsl(var(--border));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    background-color: hsl(var(--background));
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: hsl(var(--foreground));
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid hsl(var(--border));
+    background: transparent;
+    color: hsl(var(--foreground));
+    transition: all 0.2s;
+}
+
+.button:hover {
+    background: hsl(var(--accent));
+}
+
+.primaryButton {
+    composes: button;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    border-color: hsl(var(--foreground));
+}
+
+.primaryButton:hover {
+    opacity: 0.9;
+    background: hsl(var(--foreground));
+}

@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Website Builder
 
-## Getting Started
+A modern, "AI-powered" website builder that generates stunning, responsive websites based on natural language prompts. Built with Next.js and TypeScript, this application features a real-time chat interface and a live preview pane.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Natural Language Generation**: Just describe what you want (e.g., "create a restaurant website with a menu"), and the system generates it.
+- **Diverse Templates**: Supports a wide range of website types:
+    - 🛍️ **E-commerce**: Includes product grids and a functional shopping cart.
+    - 💼 **Business/Corporate**: Professional layouts with services and contact forms.
+    - 🍽️ **Restaurant**: Gourmet designs with menu listings and reservation booking.
+    - 🏋️ **Gym/Fitness**: Bold designs with membership plans.
+    - 📅 **Events**: Conference pages with agenda and ticket registration.
+    - 🎨 **Portfolio**: Showcase for creatives with case studies.
+    - 📝 **Blog**: Content-focused layouts for writers.
+- **Interactive Elements**: All generated websites come with working JavaScript components:
+    - "Add to Cart" updates counters.
+    - Contact forms validate and show success alerts.
+    - "Book Table" / "Register" buttons trigger confirmation dialogs.
+- **Real-time Preview**: See your changes instantly in the safe, sandboxed preview pane.
+- **Premium Aesthetics**: Dark-mode first design, glassmorphism effects, and smooth animations.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
+- **Language**: TypeScript
+- **Styling**: CSS Modules with CSS Variables (Vanilla CSS, no Tailwind dependency)
+- **Deployment**: Ready for Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18.17 or later
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/ai-website-builder.git
+    cd ai-website-builder
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open the app:**
+    Visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 💡 How to Use
+
+1.  Click **"Start Building"** on the landing page.
+2.  In the chat sidebar, type a prompt. Examples:
+    - *"Create an online store for sneakers"*
+    - *"I need a website for my digital marketing agency"*
+    - *"Build a landing page for a tech conference"*
+    - *"Create a restaurant website for an Italian bistro"*
+3.  The "AI" will generate the code, and the website will appear in the specific preview pane on the right.
+4.  Interact with the preview! Click buttons, fill forms, and test the responsiveness.
+
+## 🧠 "AI" Logic
+
+Currently, the application uses a sophisticated mock AI service (`src/lib/ai-mock.ts`) that maps keywords in your prompt to robust, pre-built templates. This ensures high-quality, bug-free outputs for demonstration purposes.
+
+## 📁 Project Structure
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+├── app/
+│   ├── builder/       # The main builder interface page
+│   ├── layout.tsx     # Global layout and font setup
+│   ├── page.tsx       # Landing page
+│   └── globals.css    # Global theme variables
+├── components/
+│   ├── Chat/          # Chat window, input, and bubbles
+│   ├── Layout/        # Sidebar, Header, Main container
+│   └── Preview/       # Iframe preview component
+└── lib/
+    └── ai-mock.ts     # Mock AI service and templates
+```

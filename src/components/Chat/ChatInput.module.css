@@ -1,0 +1,62 @@
+.inputContainer {
+    padding: 1rem;
+    border-top: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background));
+}
+
+.form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    background-color: hsl(var(--secondary));
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.form:focus-within {
+    border-color: hsl(var(--ring));
+}
+
+.textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    resize: none;
+    min-height: 24px;
+    max-height: 120px;
+    padding: 0.25rem;
+    color: hsl(var(--foreground));
+    font-family: inherit;
+    font-size: 0.9375rem;
+    outline: none;
+}
+
+.textarea::placeholder {
+    color: hsl(var(--muted-foreground));
+}
+
+.sendButton {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    border: none;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.sendButton:hover {
+    opacity: 0.9;
+}
+
+.sendButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
