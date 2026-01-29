@@ -1,8 +1,13 @@
-export async function generateCode(prompt: string): Promise<string> {
+export async function generateCode(prompt: string, currentCode: string = ""): Promise<string> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   const lowerPrompt = prompt.toLowerCase();
+
+  // CHECK FOR EDIT INTENT (If code exists and prompt doesn't explicitly ask for a new build)
+  if (currentCode && !lowerPrompt.includes("create") && !lowerPrompt.includes("new") && !lowerPrompt.includes("generate")) {
+    return modifyCode(currentCode, prompt);
+  }
 
   // --- E-COMMERCE TEMPLATE ---
   if (lowerPrompt.includes("store") || lowerPrompt.includes("shop") || lowerPrompt.includes("ecommerce")) {
@@ -477,4 +482,63 @@ export async function generateCode(prompt: string): Promise<string> {
     </body>
     </html>
   `;
+}
+
+// --- HELPER FOR MOCK EDITS ---
+function modifyCode(code: string, prompt: string): string {
+  let newCode = code;
+  const lower = prompt.toLowerCase();
+
+  // 1. Change Background Color
+  if (lower.includes("background") || lower.includes("bg color")) {
+    const colorMatch = lower.match(/(?:color|to)\s+([a-z]+|#[0-9a-f]{3,6})/i);
+    if (colorMatch) {
+      const newColor = colorMatch[1];
+      newCode = newCode.replace(/body\s*{[^}]*background:[^;]+;/i, (match) => {
+        return match.replace(/background:[^;]+;/, `background: ${newColor};`);
+      });
+      // Fallback if not found in body style
+      newCode = newCode.replace(/background: #[^;]+;/i, `background: ${newColor};`);
+    }
+  }
+
+  // 2. Change Text/Titles
+  if (lower.includes("title") || lower.includes("heading")) {
+    const textMatch = prompt.match(/(?:change|make|set)\s+(?:title|heading)\s+(?:to\s+)?["']?([^"']+)["']?/i);
+    if (textMatch) {
+      newCode = newCode.replace(/<h1[^>]*>(.*?)<\/h1>/i, `<h1>${textMatch[1]}</h1>`);
+    }
+  }
+
+  // 3. Add Button
+  if (lower.includes("add button") || lower.includes("create button")) {
+    const btnText = prompt.match(/button\s+(?:called|text|saying)\s+["']?([^"']+)["']?/i)?.[1] || "New Button";
+    const newBtnHtml = `<button class="btn" style="margin: 10px;" onclick="alert('${btnText} clicked')">${btnText}</button>`;
+
+    // Attempt to insert after the last button or inside a logical container
+    if (newCode.includes('</button>')) {
+      newCode = newCode.replace('</button>', `</button>\n          ${newBtnHtml}`);
+    } else {
+      newCode = newCode.replace('</body>', `  <div style="text-align:center; margin: 20px;">${newBtnHtml}</div>\n</body>`);
+    }
+  }
+
+  // 4. Dark Mode
+  if (lower.includes("dark mode")) {
+    newCode = newCode.replace(/background: #fff[^;]*;/g, "background: #1a202c;");
+    newCode = newCode.replace(/color: #333[^;]*;/g, "color: #f7fafc;");
+    newCode = newCode.replace(/background: white;/g, "background: #2d3748;");
+    newCode = newCode.replace(/color: #4a4a4a;/g, "color: #e2e8f0;");
+  }
+
+  // 5. Generic Replacement (change X to Y)
+  const changeMatch = prompt.match(/change\s+["']?([^"']+)["']?\s+to\s+["']?([^"']+)["']?/i);
+  if (changeMatch) {
+    const [_, search, replace] = changeMatch;
+    // Escape special regex chars in search term
+    const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    newCode = newCode.replace(new RegExp(safeSearch, "gi"), replace);
+  }
+
+  return newCode;
 }

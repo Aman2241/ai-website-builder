@@ -32,8 +32,8 @@ export default function BuilderPage() {
         setIsGenerating(true);
 
         try {
-            // Call AI service
-            const code = await generateCode(content);
+            // Call AI service with current code for context
+            const code = await generateCode(content, generatedCode);
             setGeneratedCode(code);
 
             // Add AI response
