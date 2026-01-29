@@ -1,4 +1,7 @@
 # AI Website Builder
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://Aman2241.github.io/ai-website-builder)
+
+[**Visit the Live Website**](https://Aman2241.github.io/ai-website-builder)
 
 A modern, "AI-powered" website builder that generates stunning, responsive websites based on natural language prompts. Built with Next.js and TypeScript, this application features a real-time chat interface and a live preview pane.
 
@@ -25,7 +28,21 @@ A modern, "AI-powered" website builder that generates stunning, responsive websi
 - **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
 - **Language**: TypeScript
 - **Styling**: CSS Modules with CSS Variables (Vanilla CSS, no Tailwind dependency)
-- **Deployment**: Ready for Vercel
+- **Deployment**: GitHub Pages
+
+## 🚀 Deployment
+
+This project is deployed to GitHub Pages.
+
+### Live URL
+**https://Aman2241.github.io/ai-website-builder**
+
+### How to Deploy Updates
+To update the live site, simply run:
+```bash
+npm run deploy
+```
+This command builds the project (static export) and pushes the output to the `gh-pages` branch.
 
 ## 🚀 Getting Started
 
